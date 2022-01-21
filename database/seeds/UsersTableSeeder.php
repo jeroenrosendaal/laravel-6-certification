@@ -5,6 +5,8 @@ use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use App\User;
 use App\Post;
+use App\Category;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,7 +21,14 @@ class UsersTableSeeder extends Seeder
             $user->posts()->saveMany(
                 factory(Post::class, 20)->create([
                     'user_id' => $user->id
-                ])
+                ])->each(function($post) {
+                    $category = Category::inRandomOrder()->first();
+                    $post->categories()->attach($post->id,[
+                        'category_id' => $category->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                })
             );
         });
     }

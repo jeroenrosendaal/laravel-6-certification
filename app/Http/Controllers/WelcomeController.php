@@ -9,6 +9,7 @@ class WelcomeController extends Controller
     public function index()
     {
         return view('welcome')
-            ->with('data', '<div><script>alert("")</script></div>');
+            ->with('data', '<div><script>alert("")</script></div>')
+            ->with('name', 'jeroen');
     }
 }

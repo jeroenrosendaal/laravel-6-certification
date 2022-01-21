@@ -31,13 +31,11 @@ class HomeController extends Controller
         ]);
 
         $user = $request->user();
-        $user->makeVisible('password');
-        $user->makeHidden(['id', 'name']);
+        $user = $user->makeHidden(['id', 'name', 'password']);
 
-        $users = User::get();
-        var_dump($users->keys());
+        $collection = $collection->forget('email');
 
-
-        return view('home');
+        return view('home')
+            ->with('users', User::all());
     }
 }

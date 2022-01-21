@@ -32,8 +32,21 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav mr-auto ml-4">
+                        <li>
+                            <a href="{{ Route('home') }}">home</a>
+                        </li>
+                        @if (Auth::user()->isAdmin())
+                            <li class="ml-2">
+                                <a href="{{ Route('users.index') }}">users</a>
+                            </li>
+                            <li class="ml-2">
+                                <a href="{{ Route('categories.index') }}">categories</a>
+                            </li>
+                        @endif
+                        <li class="ml-2">
+                            <a href="{{ Route('posts.index') }}">posts</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
